@@ -25,3 +25,44 @@ src/
 ├── projects/
 └── journal/
 ```
+
+### Pending Tasks
+
+## Content Pages
+
+- [ ] Create Blog page with:
+  - Markdown content support
+  - Blog post listing
+  - Individual post view
+- [ ] Create Journal page
+- [ ] Create Gallery page
+- [ ] Enhance Resume page with real content structure
+
+## Features
+
+- [ ] Implement Markdown content loading system
+- [ ] Add layout persistence (remember user's layout preference)
+- [ ] Add dark mode persistence
+- [ ] Add loading states for content
+- [ ] Add error boundaries
+- [ ] Add page transitions
+
+## Design
+
+- [ ] Create custom favicon
+- [ ] Add animations for layout switching
+- [ ] Add page transition animations
+- [ ] Improve mobile navigation UX
+
+## Deployment
+
+- [ ] Set up GitHub Pages deployment
+- [ ] Add GitHub Actions workflow
+- [ ] Set up custom domain (if needed)
+
+## Content Management
+
+- [ ] Create Markdown content structure
+- [ ] Add sample blog posts
+- [ ] Add sample journal entries
+- [ ] Add image optimization for gallery

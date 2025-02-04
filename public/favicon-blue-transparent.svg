@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <path d="M9 8
+           l2 -1
+           v16
+           M9 8
+           h8
+           a4 4 0 0 1 0 8
+           h-8
+           M13 16
+           h8
+           a4 4 0 0 1 0 8
+           h-8"
+        fill="none"
+        stroke="#3b82f6"
+        stroke-width="3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        transform="skewX(-10) translate(2,0)"/>
+</svg>

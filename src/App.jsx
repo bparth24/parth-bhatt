@@ -1,29 +1,63 @@
+import { useState, useEffect } from "react";
 import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import Resume from "./pages/Resume";
+import Projects from "./pages/Projects";
 
 function App() {
-  return (
-    <Layout>
-      <div className="space-y-8">
-        <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <h1 className="text-2xl font-bold mb-4">Welcome to My Website</h1>
-          <p className="text-gray-600 dark:text-gray-300">
-            This is a test page to verify the layout component is working
-            correctly.
-          </p>
-        </div>
+  const [currentPage, setCurrentPage] = useState("home");
 
-        <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
-          <h2 className="text-xl font-bold mb-4">Testing Features</h2>
-          <ul className="list-disc pl-5 space-y-2 text-gray-600 dark:text-gray-300">
-            <li>Try the dark mode toggle in the top right</li>
-            <li>Click the layout icon to switch between layouts</li>
-            <li>Use the menu button to toggle the sidebar</li>
-            <li>Test responsiveness by resizing the window</li>
-          </ul>
-        </div>
-      </div>
-    </Layout>
-  );
+  // Listen to hash changes
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace("#", "") || "home";
+      setCurrentPage(hash);
+    };
+
+    // Set initial page based on hash
+    handleHashChange();
+
+    // Listen for hash changes
+    window.addEventListener("hashchange", handleHashChange);
+    return () => window.removeEventListener("hashchange", handleHashChange);
+  }, []);
+
+  // Function to render the current page
+  const renderPage = () => {
+    switch (currentPage) {
+      case "home":
+        return <Home />;
+      case "resume":
+        return <Resume />;
+      case "projects":
+        return <Projects />;
+      case "blog":
+        return (
+          <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
+            <h1 className="text-3xl font-bold mb-4">Blog</h1>
+            <p>Blog content coming soon...</p>
+          </div>
+        );
+      case "journal":
+        return (
+          <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
+            <h1 className="text-3xl font-bold mb-4">Journal</h1>
+            <p>Journal content coming soon...</p>
+          </div>
+        );
+      case "gallery":
+        return (
+          <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow">
+            <h1 className="text-3xl font-bold mb-4">Gallery</h1>
+            <p>Gallery content coming soon...</p>
+          </div>
+        );
+      default:
+        return <Home />;
+    }
+  };
+
+  return <Layout currentPage={currentPage}>{renderPage()}</Layout>;
 }
 
 export default App;

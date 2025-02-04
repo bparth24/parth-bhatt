@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { Menu, Sun, Moon, LayoutGrid } from "lucide-react";
-import PropTypes from "prop-types";
 
-const Layout = ({ children }) => {
+/**
+ * Layout component that provides the main structure for the application
+ * @param {{ children: React.ReactNode, currentPage: string }} props
+ * @returns {JSX.Element}
+ */
+// eslint-disable-next-line react/prop-types
+const Layout = ({ children, currentPage = "home" }) => {
   const [isDark, setIsDark] = useState(false);
-  const [layout, setLayout] = useState("single"); // single, two-column, grid
+  const [layout, setLayout] = useState("single");
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleTheme = () => {
@@ -22,6 +27,15 @@ const Layout = ({ children }) => {
         return "max-w-4xl mx-auto";
     }
   };
+
+  const navItems = [
+    { id: "home", label: "Home" },
+    { id: "resume", label: "Resume" },
+    { id: "projects", label: "Projects" },
+    { id: "blog", label: "Blog" },
+    { id: "journal", label: "Journal" },
+    { id: "gallery", label: "Gallery" },
+  ];
 
   return (
     <div className={`min-h-screen ${isDark ? "dark" : ""}`}>
@@ -75,25 +89,26 @@ const Layout = ({ children }) => {
         <aside
           className={`fixed left-0 top-0 z-40 h-screen pt-16 transition-transform ${
             isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-          } bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700`}
+          } bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 w-64`}
         >
           <div className="h-full px-4 py-6 overflow-y-auto">
             <ul className="space-y-2">
-              {[
-                { text: "Home", path: "#home" },
-                { text: "Resume", path: "#resume" },
-                { text: "Projects", path: "#projects" },
-                { text: "Blog", path: "#blog" },
-                { text: "Journal", path: "#journal" },
-                { text: "Gallery", path: "#gallery" },
-              ].map((item) => (
-                <li key={item.text}>
-                  <a
-                    href={item.path}
-                    className="flex items-center p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+              {navItems.map((item) => (
+                <li key={item.id}>
+                  <button
+                    onClick={() => {
+                      setIsSidebarOpen(false);
+                      window.location.hash = item.id;
+                    }}
+                    className={`w-full text-left flex items-center p-2 rounded-lg 
+                      ${
+                        currentPage === item.id
+                          ? "bg-gray-100 dark:bg-gray-700 font-medium"
+                          : "hover:bg-gray-100 dark:hover:bg-gray-700"
+                      }`}
                   >
-                    {item.text}
-                  </a>
+                    {item.label}
+                  </button>
                 </li>
               ))}
             </ul>
@@ -114,10 +129,6 @@ const Layout = ({ children }) => {
       </div>
     </div>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default Layout;
