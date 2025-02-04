@@ -9,6 +9,7 @@ Currently, two official plugins are available:
 
 ## Project Structure
 
+```bash
 src/
 ├── components/
 │ └── Layout.jsx # The core layout component goes here
@@ -23,3 +24,4 @@ src/
 ├── blog/
 ├── projects/
 └── journal/
+```
